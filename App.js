@@ -12,17 +12,9 @@ export default class App extends React.Component{
     };
   }  
   retrieveInfo = () =>{
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    var url=`https://whitehat-dictionary.glitch.me/?word=${this.state.text}`;
-    fetch(`${proxyurl}${url}`)
-    .then((response) => response.json())
-    .then((responseJson) =>{
-        this.setState({data : JSON.parse(responseJson)});
-        console.log(this.state);
-      }).catch((error) => {
-        console.log("Error while fetching the url")
-        console.log(error);
-      })
+    var dbText = db[this.state.text];
+    console.log(dbText);
+    this.setState({data : dbText});
   }
   render(){
     return (
@@ -44,8 +36,7 @@ export default class App extends React.Component{
           </TouchableOpacity>
         </View>
 
-        {this.state.data != null ? <Text>Type: {JSON.stringify(this.state.data.results[0].type).replace(/"/g, "")}</Text> : <View/>}
-        {this.state.data != null ? <Text>Definition: {JSON.stringify(this.state.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0]).replace(/"/g, "")}</Text> : <View/>}
+        {this.state.data != null ? <View style={styles.displayView}><Text style={styles.displaytext}>Definition: </Text><Text>{this.state.data}</Text></View> : <View/>}
 
       </View>
     );
@@ -81,8 +72,15 @@ const styles = StyleSheet.create({
   buttonText : {
     alignSelf : 'center',
     color : 'white',
+
+  },
+  displaytext : {
+    fontWeight : 'bold',
   },
   inputContainer : {
     flexDirection: 'row',
+  },
+  displayView : {
+    flexDirection : 'row',
   }
 });
