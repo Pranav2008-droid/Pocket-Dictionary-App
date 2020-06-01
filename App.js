@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import CreateTitle from './Components/CreateTitle';
+import db from './localdb';
 
 export default class App extends React.Component{
   constructor() {
