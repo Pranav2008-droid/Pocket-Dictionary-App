@@ -1,0 +1,17 @@
+{
+  "name": "dictionaryApp",
+  "displayName": "dictionaryApp",
+  "expo": {
+    "name": "dictionaryApp",
+    "slug": "dictionaryApp",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
