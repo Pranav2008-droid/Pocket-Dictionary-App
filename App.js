@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import * as Speech from 'expo-speech';
 import CreateTitle from './Components/CreateTitle';
 
 export default class App extends React.Component{
@@ -21,7 +22,8 @@ export default class App extends React.Component{
       }).catch((error) => {
         console.log("Error while fetching the url")
         console.log(error);
-      })
+      });
+      Speech.speak(this.state.text);
   }
   render(){
     return (
