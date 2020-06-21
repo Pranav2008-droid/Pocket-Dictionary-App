@@ -10,20 +10,26 @@ export default class App extends React.Component{
       text: '',
       data: null,
     };
+    this.loadingStatus = false;
   }  
   retrieveInfo = () =>{
+    this.loadingStatus = true;
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     var url=`https://whitehat-dictionary.glitch.me/?word=${this.state.text}`;
+    alert("Started Loading");
     fetch(`${proxyurl}${url}`)
     .then((response) => response.json())
     .then((responseJson) =>{
         this.setState({data : JSON.parse(responseJson)});
         console.log(this.state);
+        Speech.speak(this.state.text);
+      }).then(()=>{
+        alert("Done Loading");
       }).catch((error) => {
-        console.log("Error while fetching the url")
+        console.log("Error while fetching the url");
         console.log(error);
+        alert("Enter proper text");
       });
-      Speech.speak(this.state.text);
   }
   render(){
     return (
@@ -47,7 +53,6 @@ export default class App extends React.Component{
 
         {this.state.data != null ? <Text>Type: {JSON.stringify(this.state.data.results[0].type).replace(/"/g, "")}</Text> : <View/>}
         {this.state.data != null ? <Text>Definition: {JSON.stringify(this.state.data.results[0].lexicalEntries[0].entries[0].senses[0].definitions[0]).replace(/"/g, "")}</Text> : <View/>}
-
       </View>
     );
   }
